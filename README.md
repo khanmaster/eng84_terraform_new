@@ -94,3 +94,37 @@ variable "aws_key_path" {
     default = "path for your .pem or .pub file"
 }
 ```
+# Let's create a security group for our App instance
+
+# Security group block of code:
+```
+resource "aws_security_group" "shahrukh_terraform_code_test_sg"  {
+  name = "shahrukh_terraform_code_test"
+  description = "app group"
+  vpc_id = "vpc-07e47e9d90d2076da"
+
+# Inbound rules for our app
+# Inbound rules clode block: 
+  ingress {
+    from_port       = "80" # for our to launch in the browser
+    to_port         = "80" # for our to launch in the browser
+    protocol        = "tcp"
+    cidr_blocks     = ["0.0.0.0/0"] # allow all   
+  }
+  # Inbound rules code block ends
+  
+  # Outbound rules clode block:
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1" # allow all
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  tags  = {
+    Name = "var.name"
+  }
+}
+```
+# security group code block ends
